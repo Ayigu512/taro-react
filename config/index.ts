@@ -13,14 +13,6 @@ export default defineConfig(async (merge, { command, mode }) => {
   const baseConfig: UserConfigExport = {
     projectName: 'taro-react-starter',
     date: '2023-11-5',
-    designWidth: (input: any) => {
-      // 配置 NutUI 375 尺寸
-      if (input?.file?.replace(/\\+/g, '/').indexOf('@nutui') > -1)
-        return 375
-
-      // 全局使用 Taro 默认的 750 尺寸
-      return 750
-    },
     deviceRatio: {
       640: 2.34 / 2,
       750: 1,
@@ -34,7 +26,7 @@ export default defineConfig(async (merge, { command, mode }) => {
       '@': path.resolve(__dirname, '../src'),
     },
     sass: {
-      data: '@import "@nutui/nutui-react-taro/dist/styles/variables.scss";',
+      data: '$hd: 1;',
     },
     defineConstants: {},
     copy: {
@@ -56,7 +48,7 @@ export default defineConfig(async (merge, { command, mode }) => {
         pxtransform: {
           enable: true,
           config: {
-            selectorBlackList: ['nut-'],
+            selectorBlackList: ['taroify'],
           },
         },
         url: {
@@ -88,7 +80,6 @@ export default defineConfig(async (merge, { command, mode }) => {
     h5: {
       publicPath: '/',
       staticDirectory: 'static',
-      esnextModules: ['nutui-react-taro', 'icons-react-taro'],
       output: {
         filename: 'js/[name].[hash:8].js',
         chunkFilename: 'js/[name].[chunkhash:8].js',
@@ -98,11 +89,12 @@ export default defineConfig(async (merge, { command, mode }) => {
         filename: 'css/[name].[hash].css',
         chunkFilename: 'css/[name].[chunkhash].css',
       },
+      esnextModules: ['@taroify'],
       postcss: {
         pxtransform: {
           enable: true,
           config: {
-            selectorBlackList: ['nut-'],
+            selectorBlackList: ['taroify'],
           },
         },
         autoprefixer: {

@@ -4,6 +4,7 @@ import router from '@/router'
 
 export default function Blank() {
   const isLogged = useUserStore.use.isLogged()
+  debugger
   useLoad(() => {
     if (isLogged)
       router.switchTab({ url: '/pages/home/index' })

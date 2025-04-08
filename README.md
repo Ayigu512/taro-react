@@ -2,8 +2,6 @@
 
 一个开箱即用的基于`Taro3` + `React` + `Zustand` + `TailwindCSS` + `TypeScript`的项目模板
 
-这个工程的搭建笔记可以[在这里查看](https://welives.github.io/blog/front-end/engineering/taro/create-react.html)
-
 ## 使用
 
 ```sh
@@ -21,7 +19,7 @@ pnpm dev:weapp
 
 - [Taro](https://nervjs.github.io/taro-docs/docs/)
 - [Zustand](https://zustand-demo.pmnd.rs/)
-- [NutUI-React](https://nutui.jd.com/)
+- [Taroify-React](https://taroify.github.io/taroify.com/introduce/)
 - [TypeScript](https://www.tslang.cn/)
 - [TailwindCSS](https://tailwind.nodejs.cn/)
 - [ESLint](https://eslint.nodejs.cn/)

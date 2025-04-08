@@ -57,7 +57,7 @@ class AxiosRequest {
     baseURL: process.env.TARO_APP_API,
     timeout: 10000,
     headers: {
-      'Content-Type': 'application/json;charset=utf-8',
+      'X-TYPE': 'mini',
     },
   }
 
@@ -67,6 +67,7 @@ class AxiosRequest {
 
     this.mergeConfig()
     this.service = axios.create(this.config)
+    this.config.headers['Content-Type'] = this.config.method === 'GET' ? 'application/x-www-form-urlencoded;charset=UTF-8' : 'application/json'
     // 请求拦截
     this.config?.requestInterceptors?.forEach((interceptor) => {
       Array.isArray(interceptor)

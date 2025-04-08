@@ -1,14 +1,8 @@
 import type { AxiosError, AxiosResponse } from 'axios'
+import axios from 'axios'
+import { ErrorShowType } from '../../constants'
 import type { RequestConfig } from './http'
-
-// 错误处理方案：错误类型
-enum ErrorShowType {
-  SILENT = 0,
-  WARN_MESSAGE = 1,
-  ERROR_MESSAGE = 2,
-  NOTIFICATION = 3,
-  REDIRECT = 9,
-}
+import { createAuthErrorHandler, createNetworkErrorHandler, createRetryInterceptor } from './interceptors'
 
 // 与后端约定的响应数据格式
 interface ResponseStructure<T = any> {
@@ -54,7 +48,7 @@ function responseStatusHandler(error: AxiosError) {
     const { status } = error.response as AxiosResponse
     switch (status) {
       case 401:
-        // TODO
+        window.location.href = '/pages/login/index'
         break
       case 403:
         // TODO
@@ -148,4 +142,20 @@ const requestConfig: RequestConfig<ResponseStructure> = {
   ],
 }
 
+const axiosInstance = axios.create()
+
+// 挂载拦截器
+axiosInstance.interceptors.response.use(
+  response => response,
+  (error) => {
+    const networkHandler = createNetworkErrorHandler()
+    const authHandler = createAuthErrorHandler()
+    const retryHandler = createRetryInterceptor(3)
+    return networkHandler(error)
+      .catch(authHandler)
+      .catch(retryHandler)
+  },
+)
+
+export { axiosInstance }
 export default requestConfig

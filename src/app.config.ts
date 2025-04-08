@@ -1,6 +1,5 @@
 const pages = ['pages/index/index', 'pages/blank/index', 'pages/home/index', 'pages/profile/index']
 export default defineAppConfig({
-  animation: true,
   entryPagePath: 'pages/blank/index',
   pages,
   tabBar: {
